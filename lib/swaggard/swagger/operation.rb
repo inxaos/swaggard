@@ -40,7 +40,21 @@ module Swaggard
           when 'response_status'
             success_response.status_code = value
           when 'response_root'
-            success_response.response_root = value
+            success_response.response_root = value		
+		  when 'error_response'            
+            error_response = Response.new("#{@tag.controller_class.to_s}.#{@name}")
+            if match = value.match(/(\d+)\s(.*)\s\[(.*)?\]/i)
+              status, desc, resp_class = match.captures
+              error_response.status_code = status
+              error_response.description = desc
+              error_response.response_class = resp_class
+            end
+            if match = value.match(/(\d+)\s(.*)/i)
+              status, desc = match.captures
+              error_response.status_code = status
+              error_response.description = desc
+            end
+            @responses << error_response
           end
         end
 
