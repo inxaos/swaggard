@@ -30,6 +30,7 @@ module Swaggard
       ::YARD::Tags::Library.define_tag('Response class',  :response_class)
       ::YARD::Tags::Library.define_tag('Response Root',  :response_root)
       ::YARD::Tags::Library.define_tag('Response Status',  :response_status)
+	  ::YARD::Tags::Library.define_tag('Error Response',  :error_response)
     end
 
     def get_doc(host)
